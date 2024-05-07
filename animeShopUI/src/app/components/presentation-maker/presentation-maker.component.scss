@@ -1,0 +1,20 @@
+.presentation-maker {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	height: 100vh;
+}
+
+.presentation-maker * {
+	display: block;
+	height: 100%;
+}
+
+.presentation-maker-grid_1_1 {
+	overflow: auto;
+	position: relative;
+}
+
+.presentation-maker-grid_1_1 * {
+	height: 100%;
+	width: auto;
+}

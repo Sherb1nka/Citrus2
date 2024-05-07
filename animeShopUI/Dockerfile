@@ -13,7 +13,7 @@ FROM nginx:alpine
 WORKDIR /app
 RUN rm -rf /usr/share/nginx/html/*
 RUN rm -rf /etc/nginx/conf.d/*
-COPY --from=build /app/dist/anime-shop-ui /usr/share/nginx/html
+COPY --from=build /app/dist/citrus.client/browser /usr/share/nginx/html
 COPY default.conf /etc/nginx/conf.d/
 EXPOSE 4200
 CMD [ "nginx", "-g", "daemon off;" ]
