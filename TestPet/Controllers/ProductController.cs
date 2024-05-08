@@ -8,7 +8,7 @@ using TestPet.Views;
 
 namespace TestPet.Controllers;
 
-[Route("api/")]
+[Route("api/product")]
 [ApiController]
 public class ProductController : Controller
 {
@@ -22,7 +22,7 @@ public class ProductController : Controller
     }
 
     [HttpGet]
-    [Route("product/receive")]
+    [Route("receive")]
     public async Task<IActionResult> GetProductById(int productId)
     {
         try
@@ -39,16 +39,47 @@ public class ProductController : Controller
     }
 
     [HttpGet]
-    [Route("product/all")]
-    public IActionResult GetAllProducts()
+    [Route("all")]
+    public async Task<List<Product>> GetAllProducts()
     {
+        //var products = new List<Product>
+        //{
+        //    new Product() {
+        //        Id=1,
+        //        ProductType = ProductType.AnimeCD,
+        //        Name= "Аниме ебёное1",
+        //        Amount = 12,
+        //        Seasonal = true
+        //    },
+        //    new Product() {
+        //        Id=1,
+        //        ProductType = ProductType.AnimeCD,
+        //        Name= "Аниме ебёное2",
+        //        Amount = 16,
+        //        Seasonal = true
+        //    },
+        //    new Product() {
+        //        Id=1,
+        //        ProductType = ProductType.AnimeCD,
+        //        Name= "Аниме ебёное3",
+        //        Amount = 18,
+        //        Seasonal = true
+        //    },
+        //    new Product() {
+        //        Id=1,
+        //        ProductType = ProductType.AnimeCD,
+        //        Name= "Аниме ебёное4",
+        //        Amount = 15,
+        //        Seasonal = true
+        //    },
+        //};
         var products = _productLogic.GetAllProducts().ToList();
 
-        return Ok(products);
+        return products;
     }
 
     [HttpPost]
-    [Route("product/create")]
+    [Route("create")]
     public async Task<IActionResult> CreateProduct(ProductView productView)
     {
         try
@@ -66,7 +97,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    [Route("product/create/multiple")]
+    [Route("create/multiple")]
     public async Task<IActionResult> CreateProduct(IEnumerable<ProductView> productViews)
     {
         try
@@ -87,7 +118,7 @@ public class ProductController : Controller
     }
 
     [HttpPut]
-    [Route("product/update")]
+    [Route("update")]
     public async Task<IActionResult> UpdateProduct(ProductView productView)
     {
         try
@@ -105,7 +136,7 @@ public class ProductController : Controller
     }
 
     [HttpDelete]
-    [Route("product/delete")]
+    [Route("delete")]
     public async Task<IActionResult> DeleteProduct(int id)
     {
         try
@@ -122,7 +153,7 @@ public class ProductController : Controller
     }
 
     [HttpDelete]
-    [Route("product/delete/multiple")]
+    [Route("delete/multiple")]
     public async Task<IActionResult> DeleteProducts(IEnumerable<int> ids)
     {
         int incorrectId = -1;

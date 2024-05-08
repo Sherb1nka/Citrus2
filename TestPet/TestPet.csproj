@@ -17,7 +17,6 @@
     <ProjectReference Include="..\AnimeShop.Bll.Interfaces\AnimeShop.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\AnimeShop.Bll\AnimeShop.Bll.csproj" />
     <ProjectReference Include="..\AnimeShop.EFDal\AnimeShop.EFDal.csproj" />
-    <ProjectReference Include="..\AnimeShop.TelegramBot\AnimeShop.TelegramBot\AnimeShop.TelegramBot.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop'
 
 import { NgbModalModule, NgbTooltipModule, NgbPopoverModule, NgbDropdownModule, NgbCarouselModule }
-  from '@ng-bootstrap/ng-bootstrap';
+	from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ToastaModule } from 'ngx-toasta';
@@ -53,82 +53,92 @@ import { RolesManagementComponent } from './components/controls/roles-management
 import { RoleEditorComponent } from './components/controls/role-editor.component';
 
 // Import all Froala Editor plugins.
-  import 'froala-editor/js/plugins.pkgd.min.js';
+import 'froala-editor/js/plugins.pkgd.min.js';
 
 // Import a single Froala Editor plugin.
- import 'froala-editor/js/plugins/align.min.js';
+import 'froala-editor/js/plugins/align.min.js';
 
 // Import a Froala Editor language file.
- import 'froala-editor/js/languages/de.js';
+import 'froala-editor/js/languages/de.js';
 
 // Import a third-party plugin.
- import 'froala-editor/js/third_party/font_awesome.min';
- import 'froala-editor/js/third_party/image_tui.min';
- import 'froala-editor/js/third_party/spell_checker.min';
- import 'froala-editor/js/third_party/embedly.min';
+import 'froala-editor/js/third_party/font_awesome.min';
+import 'froala-editor/js/third_party/image_tui.min';
+import 'froala-editor/js/third_party/spell_checker.min';
+import 'froala-editor/js/third_party/embedly.min';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { API_BASE_URL, ProductApiClient } from './services/ApiClient.nswag';
+import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    CustomersComponent,
-    ProductsComponent,
-    OrdersComponent,
-    SettingsComponent,
-    UsersManagementComponent, UserInfoComponent, UserPreferencesComponent,
-    RolesManagementComponent, RoleEditorComponent,
-    AboutComponent,
-    NotFoundComponent,
-    NotificationsViewerComponent,
-    SearchBoxComponent,
-    StatisticsDemoComponent, TodoDemoComponent, BannerDemoComponent,
-    EqualValidator,
-    AutofocusDirective,
-    BootstrapTabDirective,
-    GroupByPipe
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    DragDropModule,
-    AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useClass: TranslateLanguageLoader
-      }
-    }),
-    NgbTooltipModule,
-    NgbPopoverModule,
-    NgbDropdownModule,
-    NgbCarouselModule,
-    NgbModalModule,
-    NgxDatatableModule,
-    ToastaModule.forRoot(),
-    NgSelectModule,
-    NgChartsModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
-    BrowserModule
-  ],
-  providers: [
-    { provide: ErrorHandler, useClass: AppErrorHandler },
-    AlertService,
-    ThemeManager,
-    ConfigurationService,
-    AppTranslationService,
-    NotificationService,
-    NotificationEndpoint,
-    AccountService,
-    AccountEndpoint,
-    LocalStoreManager,
-    OidcHelperService
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		HomeComponent,
+		CustomersComponent,
+		ProductsComponent,
+		OrdersComponent,
+		SettingsComponent,
+		UsersManagementComponent, UserInfoComponent, UserPreferencesComponent,
+		RolesManagementComponent, RoleEditorComponent,
+		AboutComponent,
+		NotFoundComponent,
+		NotificationsViewerComponent,
+		SearchBoxComponent,
+		StatisticsDemoComponent, TodoDemoComponent, BannerDemoComponent,
+		EqualValidator,
+		AutofocusDirective,
+		BootstrapTabDirective,
+		GroupByPipe
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		FormsModule,
+		DragDropModule,
+		AppRoutingModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useClass: TranslateLanguageLoader
+			}
+		}),
+		NgbTooltipModule,
+		NgbPopoverModule,
+		NgbDropdownModule,
+		NgbCarouselModule,
+		NgbModalModule,
+		NgxDatatableModule,
+		ToastaModule.forRoot(),
+		NgSelectModule,
+		NgChartsModule,
+		FroalaEditorModule.forRoot(),
+		FroalaViewModule.forRoot(),
+		BrowserModule,
+	],
+	providers: [
+		{
+			provide: API_BASE_URL,
+			useValue: environment.baseUrl
+		},
+    	{ 
+			provide: ErrorHandler, 
+			useClass: AppErrorHandler 
+		},
+		AlertService,
+		ThemeManager,
+		ConfigurationService,
+		AppTranslationService,
+		NotificationService,
+		NotificationEndpoint,
+		AccountService,
+		AccountEndpoint,
+		LocalStoreManager,
+		OidcHelperService,
+		ProductApiClient
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,6 +16,16 @@ namespace TestPet
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "MyAllowSpecificOrigins",
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:4200",
+                                                         "http://localhost");
+                                  });
+            });
+
             // Add services to the container.
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -66,6 +76,8 @@ namespace TestPet
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            app.UseCors("MyAllowSpecificOrigins");
 
             app.MapControllers();
 

@@ -56,21 +56,12 @@ services:
     depends_on:
       - rabbitmq3
 
-  telegram_bot:
-    build:
-      context: .
-      dockerfile: AnimeShopTelegramBot/Dockerfile
-    depends_on:
-      - webapi
-
   frontend:
     build:
       context: animeShopUI
       dockerfile: Dockerfile
     ports:
       - "80:4200"
-    depends_on:
-      - telegram_bot
 
 volumes:
   redis_data:

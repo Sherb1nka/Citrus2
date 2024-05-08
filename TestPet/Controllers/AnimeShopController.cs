@@ -5,7 +5,7 @@ using TestPet.Views;
 
 namespace TestPet.Controllers;
 
-[Route("api/")]
+[Route("api/animeshop/")]
 [ApiController]
 public class AnimeShopController : Controller
 {
@@ -19,7 +19,7 @@ public class AnimeShopController : Controller
     }
 
     [HttpGet]
-    [Route("animeshop/receive")]
+    [Route("receive")]
     public async Task<IActionResult> GetAnimeShop(int animeshopId)
     {
         try
@@ -36,7 +36,7 @@ public class AnimeShopController : Controller
     }
 
     [HttpGet]
-    [Route("animeshop/receive/all")]
+    [Route("receive/all")]
     public IActionResult GetAllAnimeShops()
     {
         var animeshops = _animeShopLogic.GetAllAnimeShops();
@@ -45,7 +45,7 @@ public class AnimeShopController : Controller
     }
 
     [HttpPost]
-    [Route("animeshop/create")]
+    [Route("create")]
     public async Task<IActionResult> CreateAnimeShops(AnimeShopView shopView)
     {
         try
@@ -63,7 +63,7 @@ public class AnimeShopController : Controller
     }
 
     [HttpPut]
-    [Route("animeshop/update")]
+    [Route("update")]
     public async Task<IActionResult> UpdateAnimeShop(AnimeShopView shopView)
     {
         try
@@ -81,7 +81,7 @@ public class AnimeShopController : Controller
     }
 
     [HttpDelete]
-    [Route("animeshop/delete")]
+    [Route("delete")]
     public async Task<IActionResult> DeleteAnimeShop(int id)
     {
         var result = await _animeShopLogic.RemoveAnimeShopAsync(id);

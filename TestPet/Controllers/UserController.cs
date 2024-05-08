@@ -5,7 +5,7 @@ using TestPet.Views;
 
 namespace TestPet.Controllers;
 
-[Route("api/")]
+[Route("api/user/")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -20,7 +20,7 @@ public class UserController : ControllerBase
     }
     
     [HttpPost]
-    [Route("user/register")]
+    [Route("register")]
     public async Task<IActionResult> Register([FromBody] UserCredentialsView userCredentials)
     {
         var user = _mapper.Map<AnimeShop.Common.User>(userCredentials);
@@ -31,7 +31,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [Route("user/receive")]
+    [Route("receive")]
     public async Task<IActionResult> GetUser(string login, string password)
     {
         try
@@ -52,7 +52,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [Route("user/check_existence")]
+    [Route("check_existence")]
     public async Task<IActionResult> CheckUserExistence(string login, string password)
     {
         var result = await _userLogic.CheckUserCredentialsAsync(login, password);
@@ -66,7 +66,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut]
-    [Route("user/change")]
+    [Route("change")]
     public async Task<IActionResult> ChangeUserPersonalInfo(UserCredentialsView userCreds)
     {
         try
