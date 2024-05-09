@@ -1,4 +1,4 @@
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 using AnimeShop.Dal.DbContexts;
 using AnimeShop.Dal.Interfaces;
 using AnimeShop.EFDal;

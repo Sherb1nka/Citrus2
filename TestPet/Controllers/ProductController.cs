@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using AnimeShop.Bll.Interfaces;
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TestPet.Views;

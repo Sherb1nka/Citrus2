@@ -1,4 +1,5 @@
 using AnimeShop.Bll.Interfaces;
+using AnimeShop.Common.DBModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TestPet.Views;
@@ -23,7 +24,7 @@ public class UserController : ControllerBase
     [Route("register")]
     public async Task<IActionResult> Register([FromBody] UserCredentialsView userCredentials)
     {
-        var user = _mapper.Map<AnimeShop.Common.User>(userCredentials);
+        var user = _mapper.Map<User>(userCredentials);
 
         await _userLogic.RegisterUserAsync(user);
 
@@ -71,7 +72,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            var user = _mapper.Map<AnimeShop.Common.User>(userCreds);
+            var user = _mapper.Map<User>(userCreds);
             var result = await _userLogic.ChangePersonalInfoAsync(user);
 
             return Ok(result);

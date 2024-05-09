@@ -1,13 +1,13 @@
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 
 namespace AnimeShop.Bll.Interfaces;
 
 public interface IAnimeShopLogic
 {
-    Task<Common.AnimeShop?> GetAnimeShopByIdAsync(int id);
+    Task<Common.DBModels.AnimeShop?> GetAnimeShopByIdAsync(int id);
     Task<IEnumerable<Product>> GetProductsOfAnimeShopsAsync(int id);
-    IEnumerable<Common.AnimeShop> GetAllAnimeShops();
-    Task CreateAnimeShopAsync(AnimeShop.Common.AnimeShop animeShop);
+    IEnumerable<Common.DBModels.AnimeShop> GetAllAnimeShops();
+    Task CreateAnimeShopAsync(Common.DBModels.AnimeShop animeShop);
     Task<bool> RemoveAnimeShopAsync(int id);
-    Task UpdateAnimeShopAsync(Common.AnimeShop animeShop);
+    Task UpdateAnimeShopAsync(Common.DBModels.AnimeShop animeShop);
 }

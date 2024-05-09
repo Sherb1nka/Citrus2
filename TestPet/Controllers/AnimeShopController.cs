@@ -50,7 +50,7 @@ public class AnimeShopController : Controller
     {
         try
         {
-            var animeshop = _mapper.Map<AnimeShop.Common.AnimeShop>(shopView);
+            var animeshop = _mapper.Map<AnimeShop.Common.DBModels.AnimeShop>(shopView);
             await _animeShopLogic.CreateAnimeShopAsync(animeshop);
 
             return Ok(new { Message = "Success", Result = true });
@@ -68,7 +68,7 @@ public class AnimeShopController : Controller
     {
         try
         {
-            var animeshop = _mapper.Map<AnimeShop.Common.AnimeShop>(shopView);
+            var animeshop = _mapper.Map<AnimeShop.Common.DBModels.AnimeShop>(shopView);
             await _animeShopLogic.UpdateAnimeShopAsync(animeshop);
 
             return Ok(new { Message = "Success", Result = true });

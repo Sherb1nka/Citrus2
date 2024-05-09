@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 
 namespace TestPet.Views;
 

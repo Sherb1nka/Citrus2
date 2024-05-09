@@ -1,4 +1,4 @@
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 
 namespace AnimeShop.Bll.Interfaces;
 

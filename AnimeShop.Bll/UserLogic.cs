@@ -1,5 +1,5 @@
 using AnimeShop.Bll.Interfaces;
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 using AnimeShop.Dal.Interfaces;
 using Microsoft.Extensions.Logging;
 

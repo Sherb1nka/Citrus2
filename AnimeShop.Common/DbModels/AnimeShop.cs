@@ -1,4 +1,4 @@
-﻿namespace AnimeShop.Common
+﻿namespace AnimeShop.Common.DBModels
 {
     public class AnimeShop
     {

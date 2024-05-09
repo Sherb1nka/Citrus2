@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 using AnimeShop.Common.Utils;
 using AnimeShop.Dal.DbContexts;
 using AnimeShop.Dal.Interfaces;

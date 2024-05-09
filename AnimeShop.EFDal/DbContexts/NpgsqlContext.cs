@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
+using AnimeShop.Common.DbModels;
 
 namespace AnimeShop.Dal.DbContexts
 {
-	public sealed class NpgsqlContext : DbContext
+    public sealed class NpgsqlContext<T> : DbContext where T : class
 	{
-		public NpgsqlContext(DbContextOptions<NpgsqlContext> options)
+		public NpgsqlContext(DbContextOptions<NpgsqlContext<T>> options)
 			:base(options)
 		{
 			// Database.EnsureDeleted();
@@ -17,9 +18,12 @@ namespace AnimeShop.Dal.DbContexts
 			RegistrateUser(modelBuilder);
 			RegistrateProduct(modelBuilder);
 			RegistrateAnimeShop(modelBuilder);
+            RegistrateVideo(modelBuilder);
+            RegistratePresentation(modelBuilder);
+            RegistratePresentationSheet(modelBuilder);
         }
 
-		private void RegistrateUser(ModelBuilder modelBuilder)
+        private void RegistrateUser(ModelBuilder modelBuilder)
 		{
 			var users = modelBuilder.Entity<User>();
 
@@ -43,7 +47,7 @@ namespace AnimeShop.Dal.DbContexts
 
 		private void RegistrateAnimeShop(ModelBuilder modelBuilder)
 		{
-			var animeshops = modelBuilder.Entity<Common.AnimeShop>();
+			var animeshops = modelBuilder.Entity<Common.DBModels.AnimeShop>();
 
 			animeshops.HasKey(a => a.Id);
 			animeshops.Property(a => a.Name).IsRequired();
@@ -52,9 +56,32 @@ namespace AnimeShop.Dal.DbContexts
 			animeshops.HasMany(a => a.Products);
 		}
 
-		public DbSet<User> Users { get; set; }
-		public DbSet<Product> Products { get; set; }
-		public DbSet<Common.AnimeShop> AnimeShops { get; set; }
+		private void RegistrateVideo(ModelBuilder modelBuilder)
+		{
+			var video = modelBuilder.Entity<Video>();
+
+			video.HasKey(obj => obj.Id);
+			video.HasMany(v => v.Presentations);
+		}
+
+		private void RegistratePresentation(ModelBuilder modelBuilder)
+		{
+			var presentation = modelBuilder.Entity<Presentation>();
+
+			presentation.HasKey(obj => obj.Id);
+			presentation.HasMany(obj => obj.Sheets);
+			presentation.HasOne(obj => obj.Video);
+		}
+
+		private void RegistratePresentationSheet(ModelBuilder modelBuilder)
+		{
+			var presentationSheet = modelBuilder.Entity<PresentationSheet>();
+
+			presentationSheet.HasKey(obj => obj.Id);
+			presentationSheet.HasOne(obj => obj.Presentation);
+		}
+
+        public DbSet<T> Objects { get; set; }
     }
 }
 

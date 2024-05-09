@@ -1,6 +1,6 @@
 using AutoMapper;
-using AnimeShop.Common;
 using TestPet.Views;
+using AnimeShop.Common.DBModels;
 
 namespace TestPet;
 
@@ -10,6 +10,6 @@ public class MappingProfile : Profile
     {
         CreateMap<UserCredentialsView, User>();
         CreateMap<ProductView, Product>();
-        CreateMap<AnimeShopView, AnimeShop.Common.AnimeShop>();
+        CreateMap<AnimeShopView, AnimeShop.Common.DBModels.AnimeShop>();
     }
 }

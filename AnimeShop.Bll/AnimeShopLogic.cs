@@ -1,5 +1,5 @@
 using AnimeShop.Bll.Interfaces;
-using AnimeShop.Common;
+using AnimeShop.Common.DBModels;
 using AnimeShop.Dal.Interfaces;
 using Microsoft.Extensions.Logging;
 
@@ -17,7 +17,7 @@ public class AnimeShopLogic : BaseLogic, IAnimeShopLogic
         _animeShopDao = animeShopDao;
     }
 
-    public async Task<Common.AnimeShop?> GetAnimeShopByIdAsync(int id)
+    public async Task<Common.DBModels.AnimeShop?> GetAnimeShopByIdAsync(int id)
     {
         return await _animeShopDao.GetAnimeShopByIdAsync(id);
     }
@@ -27,12 +27,12 @@ public class AnimeShopLogic : BaseLogic, IAnimeShopLogic
         return await _animeShopDao.GetProductsOfAnimeShopAsync(id);
     }
 
-    public IEnumerable<Common.AnimeShop> GetAllAnimeShops()
+    public IEnumerable<Common.DBModels.AnimeShop> GetAllAnimeShops()
     {
         return _animeShopDao.GetAllAnimeShops();
     }
 
-    public async Task CreateAnimeShopAsync(AnimeShop.Common.AnimeShop animeShop)
+    public async Task CreateAnimeShopAsync(Common.DBModels.AnimeShop animeShop)
     {
         await _animeShopDao.CreateAnimeShopAsync(animeShop);
     }
@@ -42,7 +42,7 @@ public class AnimeShopLogic : BaseLogic, IAnimeShopLogic
         return await _animeShopDao.RemoveAnimeShopAsync(id);
     }
 
-    public async Task UpdateAnimeShopAsync(Common.AnimeShop animeShop)
+    public async Task UpdateAnimeShopAsync(Common.DBModels.AnimeShop animeShop)
     {
         await _animeShopDao.UpdateAnimeShopAsync(animeShop);
     }
