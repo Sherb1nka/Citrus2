@@ -1,4 +1,4 @@
-﻿namespace CitrusWeb.Shared.DataAccess
+﻿namespace CitrusWeb.Api.DataAccess
 {
     public interface IDataAccessConfig
     {

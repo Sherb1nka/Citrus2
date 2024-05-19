@@ -29,7 +29,7 @@ export class PresentationApiClient {
     /**
      * @return Success
      */
-    getAllProducts(): Observable<PresentationDTO[]> {
+    getAllProducts(): Observable<PresentationModel[]> {
         let url_ = this.baseUrl + "/api/presentation/getAllProducts";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -48,14 +48,14 @@ export class PresentationApiClient {
                 try {
                     return this.processGetAllProducts(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<PresentationDTO[]>;
+                    return _observableThrow(e) as any as Observable<PresentationModel[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<PresentationDTO[]>;
+                return _observableThrow(response_) as any as Observable<PresentationModel[]>;
         }));
     }
 
-    protected processGetAllProducts(response: HttpResponseBase): Observable<PresentationDTO[]> {
+    protected processGetAllProducts(response: HttpResponseBase): Observable<PresentationModel[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -69,7 +69,7 @@ export class PresentationApiClient {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200!.push(PresentationDTO.fromJS(item));
+                    result200!.push(PresentationModel.fromJS(item));
             }
             else {
                 result200 = <any>null;
@@ -88,7 +88,7 @@ export class PresentationApiClient {
      * @param body (optional) 
      * @return Success
      */
-    addPresentation(body: PresentationDTO | undefined): Observable<PresentationDTO> {
+    addPresentation(body: PresentationModel | undefined): Observable<PresentationModel> {
         let url_ = this.baseUrl + "/api/presentation/addPresentation";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -111,14 +111,14 @@ export class PresentationApiClient {
                 try {
                     return this.processAddPresentation(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<PresentationDTO>;
+                    return _observableThrow(e) as any as Observable<PresentationModel>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<PresentationDTO>;
+                return _observableThrow(response_) as any as Observable<PresentationModel>;
         }));
     }
 
-    protected processAddPresentation(response: HttpResponseBase): Observable<PresentationDTO> {
+    protected processAddPresentation(response: HttpResponseBase): Observable<PresentationModel> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -129,7 +129,7 @@ export class PresentationApiClient {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PresentationDTO.fromJS(resultData200);
+            result200 = PresentationModel.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -141,12 +141,13 @@ export class PresentationApiClient {
     }
 }
 
-export class PresentationDTO implements IPresentationDTO {
-    id?: number | undefined;
-    presentationSheets?: PresentationSheetDTO[] | undefined;
+export class PresentationModel implements IPresentationModel {
+    id?: number;
     videoId?: number;
+    presentationSheets?: PresentationSheetModel[] | undefined;
+    video?: VideoModel;
 
-    constructor(data?: IPresentationDTO) {
+    constructor(data?: IPresentationModel) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -158,18 +159,19 @@ export class PresentationDTO implements IPresentationDTO {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.videoId = _data["videoId"];
             if (Array.isArray(_data["presentationSheets"])) {
                 this.presentationSheets = [] as any;
                 for (let item of _data["presentationSheets"])
-                    this.presentationSheets!.push(PresentationSheetDTO.fromJS(item));
+                    this.presentationSheets!.push(PresentationSheetModel.fromJS(item));
             }
-            this.videoId = _data["videoId"];
+            this.video = _data["video"] ? VideoModel.fromJS(_data["video"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): PresentationDTO {
+    static fromJS(data: any): PresentationModel {
         data = typeof data === 'object' ? data : {};
-        let result = new PresentationDTO();
+        let result = new PresentationModel();
         result.init(data);
         return result;
     }
@@ -177,29 +179,32 @@ export class PresentationDTO implements IPresentationDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["videoId"] = this.videoId;
         if (Array.isArray(this.presentationSheets)) {
             data["presentationSheets"] = [];
             for (let item of this.presentationSheets)
                 data["presentationSheets"].push(item.toJSON());
         }
-        data["videoId"] = this.videoId;
+        data["video"] = this.video ? this.video.toJSON() : <any>undefined;
         return data;
     }
 }
 
-export interface IPresentationDTO {
-    id?: number | undefined;
-    presentationSheets?: PresentationSheetDTO[] | undefined;
+export interface IPresentationModel {
+    id?: number;
     videoId?: number;
+    presentationSheets?: PresentationSheetModel[] | undefined;
+    video?: VideoModel;
 }
 
-export class PresentationSheetDTO implements IPresentationSheetDTO {
-    id?: number | undefined;
+export class PresentationSheetModel implements IPresentationSheetModel {
+    id?: number;
+    presentationId?: number;
     imgUrl?: string | undefined;
     htmlText?: string | undefined;
-    presentationId?: number | undefined;
+    presentation?: PresentationModel;
 
-    constructor(data?: IPresentationSheetDTO) {
+    constructor(data?: IPresentationSheetModel) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -211,15 +216,16 @@ export class PresentationSheetDTO implements IPresentationSheetDTO {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.presentationId = _data["presentationId"];
             this.imgUrl = _data["imgUrl"];
             this.htmlText = _data["htmlText"];
-            this.presentationId = _data["presentationId"];
+            this.presentation = _data["presentation"] ? PresentationModel.fromJS(_data["presentation"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): PresentationSheetDTO {
+    static fromJS(data: any): PresentationSheetModel {
         data = typeof data === 'object' ? data : {};
-        let result = new PresentationSheetDTO();
+        let result = new PresentationSheetModel();
         result.init(data);
         return result;
     }
@@ -227,18 +233,68 @@ export class PresentationSheetDTO implements IPresentationSheetDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["presentationId"] = this.presentationId;
         data["imgUrl"] = this.imgUrl;
         data["htmlText"] = this.htmlText;
-        data["presentationId"] = this.presentationId;
+        data["presentation"] = this.presentation ? this.presentation.toJSON() : <any>undefined;
         return data;
     }
 }
 
-export interface IPresentationSheetDTO {
-    id?: number | undefined;
+export interface IPresentationSheetModel {
+    id?: number;
+    presentationId?: number;
     imgUrl?: string | undefined;
     htmlText?: string | undefined;
-    presentationId?: number | undefined;
+    presentation?: PresentationModel;
+}
+
+export class VideoModel implements IVideoModel {
+    id?: number;
+    presentations?: PresentationModel[] | undefined;
+
+    constructor(data?: IVideoModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            if (Array.isArray(_data["presentations"])) {
+                this.presentations = [] as any;
+                for (let item of _data["presentations"])
+                    this.presentations!.push(PresentationModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): VideoModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new VideoModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        if (Array.isArray(this.presentations)) {
+            data["presentations"] = [];
+            for (let item of this.presentations)
+                data["presentations"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IVideoModel {
+    id?: number;
+    presentations?: PresentationModel[] | undefined;
 }
 
 export class ApiException extends Error {

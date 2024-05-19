@@ -21,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CitrusWeb.DataAccess\CitrusWeb.DataAccess.csproj" />
     <ProjectReference Include="..\CitrusWeb.Shared\CitrusWeb.Shared.csproj" />
-    <ProjectReference Include="..\PresentationService\Services.csproj" />
   </ItemGroup>
 
 </Project>

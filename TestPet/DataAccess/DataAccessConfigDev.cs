@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CitrusWeb.Shared.DataAccess
+namespace CitrusWeb.Api.DataAccess
 {
     public class DataAccessConfigDev : IDataAccessConfig
     {

@@ -1,5 +1,4 @@
-﻿using CitrusWeb.DataAccess.DomainObjects;
-using CitrusWeb.Shared.DTOs;
+﻿using CitrusWeb.Api.DataAccess.DomainObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,8 @@ namespace CitrusWeb.Shared.Services
 {
     public interface IVideoService
     {
-        Task<VideoDO> GetVideoById(int id);
+        Task<VideoModel> GetVideoById(int id);
+
+        Task<VideoModel> AddVideo(VideoModel video);
     }
 }

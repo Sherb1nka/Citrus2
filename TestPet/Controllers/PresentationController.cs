@@ -1,4 +1,4 @@
-﻿using CitrusWeb.Shared.DTOs;
+﻿using CitrusWeb.Api.DataAccess.DomainObjects;
 using CitrusWeb.Shared.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +19,7 @@ namespace TestPet.Controllers
         [HttpGet]
         [Route("getAllProducts")]
         [AllowAnonymous]
-        public async Task<List<PresentationDTO>> GetAllProducts()
+        public async Task<List<PresentationModel>> GetAllProducts()
         {
             var presentations = await _presentationService.GetAllPresentations();
 
@@ -29,7 +29,7 @@ namespace TestPet.Controllers
         [HttpPost]
         [Route("addPresentation")]
         [AllowAnonymous]
-        public async Task<PresentationDTO> AddPresentationAsync(PresentationDTO presentation)
+        public async Task<PresentationModel> AddPresentationAsync(PresentationModel presentation)
         {
             return await _presentationService.AddPresentation(presentation);
         }

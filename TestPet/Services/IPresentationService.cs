@@ -1,4 +1,4 @@
-﻿using CitrusWeb.Shared.DTOs;
+﻿using CitrusWeb.Api.DataAccess.DomainObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +9,8 @@ namespace CitrusWeb.Shared.Services
 {
     public interface IPresentationService
     {
-        Task<List<PresentationDTO>> GetAllPresentations();
+        Task<List<PresentationModel>> GetAllPresentations();
 
-        Task<PresentationDTO> AddPresentation(PresentationDTO presentationDto);
+        Task<PresentationModel> AddPresentation(PresentationModel presentationDto);
     }
 }

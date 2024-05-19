@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { PresentationSheetComponent } from "./presentation-sheet/presentation-sheet.component";
 import { PresentationSheetlistComponent } from "./presentation-sheetlist/presentation-sheetlist.component";
-import { PresentationApiClient, PresentationDTO, PresentationSheetDTO } from '../../services/ApiClient.nswag';
+import { PresentationApiClient, PresentationModel, PresentationSheetModel } from '../../services/ApiClient.nswag';
 
 @Component({
     selector: 'ctrs-presentation-maker',
@@ -11,25 +11,26 @@ import { PresentationApiClient, PresentationDTO, PresentationSheetDTO } from '..
     imports: [PresentationSheetComponent, PresentationSheetlistComponent]
 })
 export class PresentationMakerComponent {
-    private _presentation: PresentationDTO = new PresentationDTO;
+    private _presentation: PresentationModel = new PresentationModel;
     private _imageUrls: string[] = [];
 
-    constructor(private _presentationApiClient: PresentationApiClient){
+    constructor(private _presentationApiClient: PresentationApiClient) {
+        this.presentation.videoId = 0;
     }
 
-    get presentation(): PresentationDTO {
+    get presentation(): PresentationModel {
         return this._presentation;
     }
 
-    set presentation(presentation: PresentationDTO) {
+    set presentation(presentation: PresentationModel) {
         this._presentation = presentation;
     }
 
-    get presentationSheetsList(): PresentationSheetDTO[] {
+    get presentationSheetsList(): PresentationSheetModel[] {
         return this.presentation.presentationSheets ?? [];
     }
 
-    handleSlideSave(presentationSheet: PresentationSheetDTO): void
+    handleSlideSave(presentationSheet: PresentationSheetModel): void
     {
         if (!this.presentation.presentationSheets) {
             this._presentation.presentationSheets = [];
@@ -42,7 +43,7 @@ export class PresentationMakerComponent {
         this._presentationApiClient.addPresentation(this.presentation)
             .toPromise()
             .then((p) => {
-                this.presentation = p as PresentationDTO;
+                this.presentation = p as PresentationModel;
                 console.log("presentation saved");
             });
     }

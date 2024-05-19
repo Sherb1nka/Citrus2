@@ -1,5 +1,5 @@
-﻿using CitrusWeb.Shared.DataAccess;
-using CitrusWeb.Shared.DataAccess.DomainObjects;
+﻿using CitrusWeb.Api.DataAccess;
+using CitrusWeb.Api.DataAccess.DomainObjects;
 using CitrusWeb.Shared.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +21,14 @@ namespace Services.Video
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<VideoModel> AddVideo(VideoModel video)
+        {
+            var newObj = _unitOfWork.Videos.Add(video);
+            await _unitOfWork.CommitAsync();
+
+            return await GetVideoQuerry().FirstOrDefaultAsync(x => x.Id == newObj.Entity.Id);
+        }
+
         public async Task<VideoModel> GetVideoById(int id)
         {
             var obj = await _unitOfWork.Videos
@@ -28,7 +36,12 @@ namespace Services.Video
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return obj;
-            
+        }
+
+        private IQueryable<VideoModel> GetVideoQuerry()
+        {
+            return _unitOfWork.Videos
+                .Include(x => x.Presentations);
         }
     }
 }

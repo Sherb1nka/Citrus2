@@ -1,6 +1,6 @@
 import { Component, Input,} from '@angular/core';
 import {NgFor} from "@angular/common";
-import { PresentationDTO, PresentationSheetDTO } from '../../../services/ApiClient.nswag';
+import { PresentationModel, PresentationSheetModel } from '../../../services/ApiClient.nswag';
 @Component({
 	selector: 'ctrs-presentation-sheetlist',
 	standalone: true,
@@ -10,14 +10,14 @@ import { PresentationDTO, PresentationSheetDTO } from '../../../services/ApiClie
 })
 export class PresentationSheetlistComponent {	
 
-	private _presentationSheets: PresentationSheetDTO[] = [];
+	private _presentationSheets: PresentationSheetModel[] = [];
 
-	get presentationSheets(): PresentationSheetDTO[] {
+	get presentationSheets(): PresentationSheetModel[] {
 		return this._presentationSheets;
 	}
 
 	@Input()
-	set presentationSheets(presentationSheets: PresentationSheetDTO[]) {	
+	set presentationSheets(presentationSheets: PresentationSheetModel[]) {	
 		this._presentationSheets = presentationSheets;
 	}
 }

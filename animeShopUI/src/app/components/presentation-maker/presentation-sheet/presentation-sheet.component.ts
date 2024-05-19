@@ -17,7 +17,7 @@ import 'froala-editor/js/third_party/embedly.min';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { EDIT_SLIDE } from '../constants';
 import html2canvas from 'html2canvas';
-import { PresentationSheetDTO } from '../../../services/ApiClient.nswag';
+import { PresentationSheetModel } from '../../../services/ApiClient.nswag';
 
 @Component({
 	selector: 'ctrs-presentation-sheet',
@@ -33,19 +33,19 @@ export class PresentationSheetComponent {
 	
 	editorContent: string = EDIT_SLIDE;
 	
-	private _presentationSheet: PresentationSheetDTO = new PresentationSheetDTO;
+	private _presentationSheet: PresentationSheetModel = new PresentationSheetModel;
 
-	get presentationSheet(): PresentationSheetDTO {
+	get presentationSheet(): PresentationSheetModel {
 		return this._presentationSheet;
 	}
 
-	set presentationSheet(presentationSheet: PresentationSheetDTO) {
+	set presentationSheet(presentationSheet: PresentationSheetModel) {
 		this._presentationSheet = presentationSheet;
 	}
 	
 
 	@Output()
-	onSlideSave = new EventEmitter<PresentationSheetDTO>();
+	onSlideSave = new EventEmitter<PresentationSheetModel>();
 
 	makeSnapshot() {
 		html2canvas(document.querySelector("#capture") as HTMLElement).then((canvas) => {
