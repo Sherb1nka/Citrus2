@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrusWeb.Api", "TestPet\Ci
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CitrusWeb", "CitrusWeb", "{BB3D2E3C-1051-4BCB-BCD5-D22D237ED702}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrusWeb.Shared", "CitrusWeb.Shared\CitrusWeb.Shared.csproj", "{69C11A51-10BA-4644-A7E6-BFFBC9AEE7BA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,17 +17,12 @@ Global
 		{129D13E7-263E-4583-AAF6-228EC03ABC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{129D13E7-263E-4583-AAF6-228EC03ABC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{129D13E7-263E-4583-AAF6-228EC03ABC7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69C11A51-10BA-4644-A7E6-BFFBC9AEE7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69C11A51-10BA-4644-A7E6-BFFBC9AEE7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69C11A51-10BA-4644-A7E6-BFFBC9AEE7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69C11A51-10BA-4644-A7E6-BFFBC9AEE7BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{129D13E7-263E-4583-AAF6-228EC03ABC7F} = {BB3D2E3C-1051-4BCB-BCD5-D22D237ED702}
-		{69C11A51-10BA-4644-A7E6-BFFBC9AEE7BA} = {BB3D2E3C-1051-4BCB-BCD5-D22D237ED702}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1651EF1F-A2E9-46D4-B05C-155EB89C3EBA}

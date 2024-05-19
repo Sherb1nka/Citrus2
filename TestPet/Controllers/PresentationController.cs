@@ -3,7 +3,7 @@ using CitrusWeb.Shared.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TestPet.Controllers
+namespace CitrusWeb.Api.Controllers
 {
     [Route("api/presentation")]
     [ApiController]
@@ -21,7 +21,7 @@ namespace TestPet.Controllers
         [AllowAnonymous]
         public async Task<List<PresentationModel>> GetAllProducts()
         {
-            var presentations = await _presentationService.GetAllPresentations();
+            var presentations = await _presentationService.GetAllPresentationsAsync();
 
             return presentations;
         }
@@ -31,7 +31,15 @@ namespace TestPet.Controllers
         [AllowAnonymous]
         public async Task<PresentationModel> AddPresentationAsync(PresentationModel presentation)
         {
-            return await _presentationService.AddPresentation(presentation);
+            return await _presentationService.AddPresentationAsync(presentation);
+        }
+
+        [HttpGet]
+        [Route("getPresentationById")]
+        [AllowAnonymous]
+        public async Task<PresentationModel> GetPresentationById(int id)
+        {
+            return await _presentationService.GetPresentationByIdAsync(id);
         }
 
     }

@@ -14,7 +14,7 @@ namespace Services.Presentation
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PresentationModel> AddPresentation(PresentationModel presentation)
+        public async Task<PresentationModel> AddPresentationAsync(PresentationModel presentation)
         {
             PresentationModel obj;
 
@@ -32,9 +32,14 @@ namespace Services.Presentation
             return await GetPresentationQuerry().FirstOrDefaultAsync(x => x.Id == obj.Id);
         }
 
-        public Task<List<PresentationModel>> GetAllPresentations()
+        public async Task<List<PresentationModel>> GetAllPresentationsAsync()
         {
-            throw new NotImplementedException();
+            return await GetPresentationQuerry().ToListAsync();
+        }
+
+        public async Task<PresentationModel> GetPresentationByIdAsync(int id) 
+        {
+            return await GetPresentationQuerry().FirstOrDefaultAsync(e => e.Id == id);
         }
 
         private IQueryable<PresentationModel> GetPresentationQuerry()

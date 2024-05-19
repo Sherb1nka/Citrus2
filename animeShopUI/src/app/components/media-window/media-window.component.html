@@ -3,8 +3,13 @@
     <div class="media-window-grid_1_1">
         <ctrs-videoplayer videoFileName="lectionTest.mp4"></ctrs-videoplayer>
     </div>
-    <div class="media-window-grid_1_2">
-        <ctrs-presentation></ctrs-presentation>
+    <div class="media-window-grid_1_2"
+         *ngIf="isPresentationAvailable">
+        <ctrs-presentation [presentationSheets]="currentVideoPresentationSheets"></ctrs-presentation>
+    </div>
+    <div class="media-window-grid_1_2"
+         *ngIf="!isPresentationAvailable">
+         <a routerLink="/presentationmaker"> Создать презентацию</a>
     </div>
     <div class="media-window-grid_1_3">
         <span>Тестовое название видео</span>

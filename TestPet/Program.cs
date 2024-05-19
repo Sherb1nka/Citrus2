@@ -4,7 +4,7 @@ using Services.Presentation;
 using Services.Video;
 using System.Text.Json.Serialization;
 
-namespace TestPet
+namespace CitrusWeb.Api
 {
     public static class Program
     {

@@ -26,19 +26,18 @@ namespace Services.Video
             var newObj = _unitOfWork.Videos.Add(video);
             await _unitOfWork.CommitAsync();
 
-            return await GetVideoQuerry().FirstOrDefaultAsync(x => x.Id == newObj.Entity.Id);
+            return await GetVideoQuery().FirstOrDefaultAsync(x => x.Id == newObj.Entity.Id);
         }
 
         public async Task<VideoModel> GetVideoById(int id)
         {
-            var obj = await _unitOfWork.Videos
-                .Include(x => x.Presentations)
+            var obj = await GetVideoQuery()
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return obj;
         }
 
-        private IQueryable<VideoModel> GetVideoQuerry()
+        private IQueryable<VideoModel> GetVideoQuery()
         {
             return _unitOfWork.Videos
                 .Include(x => x.Presentations);

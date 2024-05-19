@@ -9,8 +9,10 @@ namespace CitrusWeb.Shared.Services
 {
     public interface IPresentationService
     {
-        Task<List<PresentationModel>> GetAllPresentations();
+        Task<List<PresentationModel>> GetAllPresentationsAsync();
 
-        Task<PresentationModel> AddPresentation(PresentationModel presentationDto);
+        Task<PresentationModel> AddPresentationAsync(PresentationModel presentationDto);
+
+        Task<PresentationModel> GetPresentationByIdAsync(int id);
     }
 }
