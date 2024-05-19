@@ -2,5 +2,5 @@ namespace AnimeShop.Common;
 
 public class EnvironmentVariables
 {
-    public string NpgsqlConnectionString { get; set; }
+    public bool Production { get; set; }
 }

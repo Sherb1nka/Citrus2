@@ -1,12 +1,9 @@
+using CitrusWeb.DataAccess;
+using CitrusWeb.Shared.DataAccess;
+using CitrusWeb.Shared.Services;
+using Services.Presentation;
+using Services.Video;
 using System.Text.Json.Serialization;
-using AnimeShop.Bll;
-using AnimeShop.Bll.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using AnimeShop.Dal.DbContexts;
-using AnimeShop.Common;
-using AnimeShop.Dal;
-using AnimeShop.Dal.Interfaces;
-using AutoMapper;
 
 namespace TestPet
 {
@@ -23,6 +20,9 @@ namespace TestPet
                                   {
                                       policy.WithOrigins("http://localhost:4200",
                                                          "http://localhost");
+                                      policy.AllowAnyHeader();
+                                      policy.AllowAnyMethod();
+                                      policy.AllowCredentials();
                                   });
             });
 
@@ -32,13 +32,20 @@ namespace TestPet
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddLogging();
-            
-            builder.Services.AddScoped<IUserDao, UserDao>();
-            builder.Services.AddScoped<IAnimeShopDao, AnimeShopDao>();
-            builder.Services.AddScoped<IProductDao, ProductDao>();
-            builder.Services.AddScoped<IUserLogic, UserLogic>();
-            builder.Services.AddScoped<IAnimeShopLogic, AnimeShopLogic>();
-            builder.Services.AddScoped<IProductLogic, ProductLogic>();
+
+            if(builder.Environment.IsProduction())
+            {
+                builder.Services.AddTransient<IDataAccessConfig, DataAccessConfigProd>();
+            }
+            else
+            {
+                builder.Services.AddTransient<IDataAccessConfig, DataAccessConfigDev>();
+            }
+
+            builder.Services.AddScoped<IUnitOfWork, CitrusUnitOfWork>();
+            builder.Services.AddTransient<IVideoService, VideoService>();
+
+            builder.Services.AddTransient<IPresentationService, PresentationService>();
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
@@ -46,25 +53,6 @@ namespace TestPet
                 var jsonConverter = new JsonStringEnumConverter();
                 options.JsonSerializerOptions.Converters.Add(jsonConverter);
             });
-
-            var config = builder.Configuration
-                .GetSection("EnvironmentVariables")
-                .Get<EnvironmentVariables>();
-
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                var mappingProfile = new MappingProfile();
-                mc.AddProfile(mappingProfile);
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            builder.Services.AddSingleton(mapper);
-
-            builder.Services.AddDbContext<NpgsqlContext>(
-                options =>
-                {
-                    options.UseNpgsql(config?.NpgsqlConnectionString);
-                });
 
             var app = builder.Build();
 
@@ -80,9 +68,6 @@ namespace TestPet
             app.UseCors("MyAllowSpecificOrigins");
 
             app.MapControllers();
-
-            var options = new DbContextOptionsBuilder<NpgsqlContext>();
-            options.UseNpgsql(config?.NpgsqlConnectionString);
             
             app.Run();
         }

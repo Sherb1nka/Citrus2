@@ -1,16 +1,11 @@
 ﻿using AnimeShop.Common.DBModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimeShop.Common.DbModels
 {
-    public class Video : IDbModel
+    public class Video : DomainObject   
     {
         public int Id { get; set; }
 
-        public IEnumerable<Presentation> Presentations { get; set; }
+        public ICollection<Presentation> Presentations { get; set; }
     }
 }

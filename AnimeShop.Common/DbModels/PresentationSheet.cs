@@ -2,7 +2,7 @@
 
 namespace AnimeShop.Common.DbModels
 {
-    public class PresentationSheet : IDbModel
+    public class PresentationSheet : DomainObject
     {
         public int Id { get; set; }
 

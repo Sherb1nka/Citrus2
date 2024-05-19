@@ -1,5 +1,5 @@
 <ul class="presentation_sheetlist">
-	<li *ngFor="let imageUrl of imageUrls">
-		<img src="{{imageUrl}}">
+	<li *ngFor="let ps of presentationSheets">
+		<img src="{{ps?.imgUrl}}">
 	</li>
 </ul>

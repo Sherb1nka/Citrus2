@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter} from '@angular/core';
+import { Component, Output, EventEmitter, OnInit} from '@angular/core';
 
 // Import all Froala Editor plugins.
 import 'froala-editor/js/plugins.pkgd.min.js';
@@ -17,6 +17,7 @@ import 'froala-editor/js/third_party/embedly.min';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { EDIT_SLIDE } from '../constants';
 import html2canvas from 'html2canvas';
+import { PresentationSheetDTO } from '../../../services/ApiClient.nswag';
 
 @Component({
 	selector: 'ctrs-presentation-sheet',
@@ -31,14 +32,32 @@ import html2canvas from 'html2canvas';
 export class PresentationSheetComponent {	
 	
 	editorContent: string = EDIT_SLIDE;
+	
+	private _presentationSheet: PresentationSheetDTO = new PresentationSheetDTO;
+
+	get presentationSheet(): PresentationSheetDTO {
+		return this._presentationSheet;
+	}
+
+	set presentationSheet(presentationSheet: PresentationSheetDTO) {
+		this._presentationSheet = presentationSheet;
+	}
+	
 
 	@Output()
-	onSlideSave = new EventEmitter<string>();
+	onSlideSave = new EventEmitter<PresentationSheetDTO>();
 
-	saveSlide() {
+	makeSnapshot() {
 		html2canvas(document.querySelector("#capture") as HTMLElement).then((canvas) => {
 			let imageUrl = canvas.toDataURL("image/png");
-			this.onSlideSave.emit(imageUrl);
+			this._presentationSheet.imgUrl = canvas.toDataURL("image.png");
+			this._presentationSheet.htmlText = this.editorContent;
+			this.saveSlide();
 		});
 	}
+
+	saveSlide() {
+		this.onSlideSave.emit(this.presentationSheet)
+	}
+
 }

@@ -1,96 +1,96 @@
-using AnimeShop.Bll.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using TestPet.Views;
+//using AnimeShop.Bll.Interfaces;
+//using AutoMapper;
+//using Microsoft.AspNetCore.Mvc;
+//using TestPet.Views;
 
-namespace TestPet.Controllers;
+//namespace TestPet.Controllers;
 
-[Route("api/animeshop/")]
-[ApiController]
-public class AnimeShopController : Controller
-{
-    private readonly IMapper _mapper;
-    private readonly IAnimeShopLogic _animeShopLogic;
+//[Route("api/animeshop/")]
+//[ApiController]
+//public class AnimeShopController : Controller
+//{
+//    private readonly IMapper _mapper;
+//    private readonly IAnimeShopLogic _animeShopLogic;
 
-    public AnimeShopController(IMapper mapper, IAnimeShopLogic animeShopLogic)
-    {
-        _mapper = mapper;
-        _animeShopLogic = animeShopLogic;
-    }
+//    public AnimeShopController(IMapper mapper, IAnimeShopLogic animeShopLogic)
+//    {
+//        _mapper = mapper;
+//        _animeShopLogic = animeShopLogic;
+//    }
 
-    [HttpGet]
-    [Route("receive")]
-    public async Task<IActionResult> GetAnimeShop(int animeshopId)
-    {
-        try
-        {
-            var animeshop = await _animeShopLogic.GetAnimeShopByIdAsync(animeshopId);
+//    [HttpGet]
+//    [Route("receive")]
+//    public async Task<IActionResult> GetAnimeShop(int animeshopId)
+//    {
+//        try
+//        {
+//            var animeshop = await _animeShopLogic.GetAnimeShopByIdAsync(animeshopId);
 
-            return Ok(animeshop);
-        }
-        catch (Exception exp)
-        {
-            return NotFound($"There's no animeshop with such id.\n" +
-                            $"{exp.GetType()}: {exp.Message}");
-        }
-    }
+//            return Ok(animeshop);
+//        }
+//        catch (Exception exp)
+//        {
+//            return NotFound($"There's no animeshop with such id.\n" +
+//                            $"{exp.GetType()}: {exp.Message}");
+//        }
+//    }
 
-    [HttpGet]
-    [Route("receive/all")]
-    public IActionResult GetAllAnimeShops()
-    {
-        var animeshops = _animeShopLogic.GetAllAnimeShops();
+//    [HttpGet]
+//    [Route("receive/all")]
+//    public IActionResult GetAllAnimeShops()
+//    {
+//        var animeshops = _animeShopLogic.GetAllAnimeShops();
 
-        return Ok(animeshops);
-    }
+//        return Ok(animeshops);
+//    }
 
-    [HttpPost]
-    [Route("create")]
-    public async Task<IActionResult> CreateAnimeShops(AnimeShopView shopView)
-    {
-        try
-        {
-            var animeshop = _mapper.Map<AnimeShop.Common.DBModels.AnimeShop>(shopView);
-            await _animeShopLogic.CreateAnimeShopAsync(animeshop);
+//    [HttpPost]
+//    [Route("create")]
+//    public async Task<IActionResult> CreateAnimeShops(AnimeShopView shopView)
+//    {
+//        try
+//        {
+//            var animeshop = _mapper.Map<AnimeShop.Common.DBModels.AnimeShop>(shopView);
+//            await _animeShopLogic.CreateAnimeShopAsync(animeshop);
 
-            return Ok(new { Message = "Success", Result = true });
-        }
-        catch (Exception exp)
-        {
-            return BadRequest($"Some error on creating anime shop.\n" +
-                              $"{exp.GetType()}: {exp.Message}");
-        }
-    }
+//            return Ok(new { Message = "Success", Result = true });
+//        }
+//        catch (Exception exp)
+//        {
+//            return BadRequest($"Some error on creating anime shop.\n" +
+//                              $"{exp.GetType()}: {exp.Message}");
+//        }
+//    }
 
-    [HttpPut]
-    [Route("update")]
-    public async Task<IActionResult> UpdateAnimeShop(AnimeShopView shopView)
-    {
-        try
-        {
-            var animeshop = _mapper.Map<AnimeShop.Common.DBModels.AnimeShop>(shopView);
-            await _animeShopLogic.UpdateAnimeShopAsync(animeshop);
+//    [HttpPut]
+//    [Route("update")]
+//    public async Task<IActionResult> UpdateAnimeShop(AnimeShopView shopView)
+//    {
+//        try
+//        {
+//            var animeshop = _mapper.Map<AnimeShop.Common.DBModels.AnimeShop>(shopView);
+//            await _animeShopLogic.UpdateAnimeShopAsync(animeshop);
 
-            return Ok(new { Message = "Success", Result = true });
-        }
-        catch (Exception exp)
-        {
-            return BadRequest($"There's no such anime shop.\n" +
-                              $"{exp.GetType()}: {exp.Message}");
-        }
-    }
+//            return Ok(new { Message = "Success", Result = true });
+//        }
+//        catch (Exception exp)
+//        {
+//            return BadRequest($"There's no such anime shop.\n" +
+//                              $"{exp.GetType()}: {exp.Message}");
+//        }
+//    }
 
-    [HttpDelete]
-    [Route("delete")]
-    public async Task<IActionResult> DeleteAnimeShop(int id)
-    {
-        var result = await _animeShopLogic.RemoveAnimeShopAsync(id);
+//    [HttpDelete]
+//    [Route("delete")]
+//    public async Task<IActionResult> DeleteAnimeShop(int id)
+//    {
+//        var result = await _animeShopLogic.RemoveAnimeShopAsync(id);
 
-        if (result)
-        {
-            return Ok(new { Message = "Success", Result = true });
-        }
+//        if (result)
+//        {
+//            return Ok(new { Message = "Success", Result = true });
+//        }
 
-        return NotFound($"There's no anime shop with id.\n");
-    }
-}
+//        return NotFound($"There's no anime shop with id.\n");
+//    }
+//}

@@ -68,7 +68,7 @@ import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { API_BASE_URL, ProductApiClient } from './services/ApiClient.nswag';
+import { API_BASE_URL, PresentationApiClient } from './services/ApiClient.nswag';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -137,7 +137,7 @@ import { environment } from '../environments/environment';
 		AccountEndpoint,
 		LocalStoreManager,
 		OidcHelperService,
-		ProductApiClient
+		PresentationApiClient
 	],
 	bootstrap: [AppComponent]
 })

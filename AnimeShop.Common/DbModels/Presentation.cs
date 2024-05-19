@@ -2,11 +2,11 @@
 
 namespace AnimeShop.Common.DBModels
 {
-    public class Presentation : IDbModel
+    public class Presentation : DomainObject
     {
         public int Id { get; set; }
 
-        public IEnumerable<PresentationSheet> Sheets { get; set; }
+        public ICollection<PresentationSheet> Sheets { get; set; }
 
         public virtual Video Video { get; set; }
     }

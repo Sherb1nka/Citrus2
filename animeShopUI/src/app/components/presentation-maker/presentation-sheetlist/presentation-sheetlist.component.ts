@@ -1,5 +1,6 @@
 import { Component, Input,} from '@angular/core';
 import {NgFor} from "@angular/common";
+import { PresentationDTO, PresentationSheetDTO } from '../../../services/ApiClient.nswag';
 @Component({
 	selector: 'ctrs-presentation-sheetlist',
 	standalone: true,
@@ -9,14 +10,14 @@ import {NgFor} from "@angular/common";
 })
 export class PresentationSheetlistComponent {	
 
-	private _imgUrls: string[] = []
-	
-	get imageUrls() {
-		return this._imgUrls;
+	private _presentationSheets: PresentationSheetDTO[] = [];
+
+	get presentationSheets(): PresentationSheetDTO[] {
+		return this._presentationSheets;
 	}
 
 	@Input()
-	set imageUrls(imageUrls: string[]) {	
-		this._imgUrls = imageUrls;
+	set presentationSheets(presentationSheets: PresentationSheetDTO[]) {	
+		this._presentationSheets = presentationSheets;
 	}
 }
