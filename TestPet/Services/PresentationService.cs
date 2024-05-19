@@ -16,17 +16,7 @@ namespace Services.Presentation
 
         public async Task<PresentationModel> AddPresentation(PresentationModel presentation)
         {
-            var obj = await _unitOfWork.Presentations.FirstOrDefaultAsync(e => e.Id == presentation.Id);
-
-            if (obj == null)
-            {
-                obj = (_unitOfWork.Presentations.Add(presentation)).;
-            }
-            else
-            {
-                
-            }
-
+            var newObj = _unitOfWork.Presentations.Add(presentation);
             await _unitOfWork.CommitAsync();
 
             return await GetPresentationQuerry().FirstOrDefaultAsync(x => x.Id == newObj.Entity.Id);
