@@ -9,7 +9,9 @@
     </div>
     <div class="media-window-grid_1_2"
          *ngIf="!isPresentationAvailable">
-         <a routerLink="/presentationmaker"> Создать презентацию</a>
+         <button (click)="openPresentationMaker()">
+            Создать презентацию
+         </button>
     </div>
     <div class="media-window-grid_1_3">
         <span>Тестовое название видео</span>

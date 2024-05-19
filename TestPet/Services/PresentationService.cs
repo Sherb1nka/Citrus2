@@ -16,7 +16,7 @@ namespace Services.Presentation
 
         public async Task<PresentationModel> AddPresentationAsync(PresentationModel presentation)
         {
-            PresentationModel obj;
+            PresentationModel obj;  
 
             if (!_unitOfWork.Presentations.Any(e => e.Id == presentation.Id))
             {

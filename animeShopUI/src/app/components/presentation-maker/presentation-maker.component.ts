@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { PresentationSheetComponent } from "./presentation-sheet/presentation-sheet.component";
 import { PresentationSheetlistComponent } from "./presentation-sheetlist/presentation-sheetlist.component";
 import { PresentationApiClient, PresentationModel, PresentationSheetModel } from '../../services/ApiClient.nswag';
+import { Navigation, Router } from '@angular/router';
 
 @Component({
     selector: 'ctrs-presentation-maker',
@@ -14,8 +15,13 @@ export class PresentationMakerComponent {
     private _presentation: PresentationModel = new PresentationModel;
     private _imageUrls: string[] = [];
 
-    constructor(private _presentationApiClient: PresentationApiClient) {
-        this.presentation.videoId = 0;
+    constructor(private _presentationApiClient: PresentationApiClient,
+                private readonly _router: Router) {
+
+        let nav: Navigation = this._router.getCurrentNavigation() as Navigation;
+        if (nav.extras && nav.extras.state && nav.extras.state["videoId"]) {
+            this.presentation.videoId = nav.extras.state["videoId"] as number;
+        }
     }
 
     get presentation(): PresentationModel {

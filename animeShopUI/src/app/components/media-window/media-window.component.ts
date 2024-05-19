@@ -5,6 +5,7 @@ import { CommentariesComponent } from "../commentaries/commentaries.component";
 import { SuggestionsComponent } from "../suggestions/suggestions.component";
 import { PresentationApiClient, PresentationModel, PresentationSheetModel, VideoApiClient, VideoModel } from '../../services/ApiClient.nswag';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'ctrs-media-window',
@@ -22,9 +23,10 @@ import { NgIf } from '@angular/common';
 export class MediaWindowComponent implements OnInit {
     
     constructor(private readonly _videoApiClient: VideoApiClient,
-                private readonly _presentationApiClient: PresentationApiClient
+                private readonly _presentationApiClient: PresentationApiClient,
+                private readonly _router: Router
     ) {
-        this._videoApiClient.getVideoById(0).toPromise()
+        this._videoApiClient.getVideoById(4).toPromise()
         .then(v => {
             this.video = v as VideoModel;
             this._presentationApiClient.getPresentationById(this.video.presentations?.at(0)?.id)
@@ -66,5 +68,8 @@ export class MediaWindowComponent implements OnInit {
         return this._presentation.presentationSheets as PresentationSheetModel[];
     }
 
+    openPresentationMaker(): void {
+        this._router.navigate(['presentationmaker'], { state: { videoId: this.video.id } });
+    }
     
 }

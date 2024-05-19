@@ -23,10 +23,20 @@ namespace Services.Video
 
         public async Task<VideoModel> AddVideo(VideoModel video)
         {
-            var newObj = _unitOfWork.Videos.Add(video);
+            VideoModel obj;
+            
+            if (!_unitOfWork.Videos.Any(e => e.Id == video.Id))
+            {
+                obj = _unitOfWork.Videos.Add(video).Entity;
+            }
+            else
+            {
+                obj = _unitOfWork.Videos.Update(video).Entity;
+            }
+
             await _unitOfWork.CommitAsync();
 
-            return await GetVideoQuery().FirstOrDefaultAsync(x => x.Id == newObj.Entity.Id);
+            return await GetVideoQuery().FirstOrDefaultAsync(x => x.Id == obj.Id);
         }
 
         public async Task<VideoModel> GetVideoById(int id)
