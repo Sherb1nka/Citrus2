@@ -16,10 +16,20 @@ namespace Services.Presentation
 
         public async Task<PresentationModel> AddPresentation(PresentationModel presentation)
         {
-            var newObj = _unitOfWork.Presentations.Add(presentation);
+            PresentationModel obj;
+
+            if (!_unitOfWork.Presentations.Any(e => e.Id == presentation.Id))
+            {
+                obj = _unitOfWork.Presentations.Add(presentation).Entity;
+            }
+            else
+            {
+                obj = _unitOfWork.Presentations.Update(presentation).Entity;
+            }
+
             await _unitOfWork.CommitAsync();
 
-            return await GetPresentationQuerry().FirstOrDefaultAsync(x => x.Id == newObj.Entity.Id);
+            return await GetPresentationQuerry().FirstOrDefaultAsync(x => x.Id == obj.Id);
         }
 
         public Task<List<PresentationModel>> GetAllPresentations()
