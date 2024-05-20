@@ -2,10 +2,18 @@
     vertical-align: middle;
     flex-wrap: inherit;
     height: inherit;
+     
+    .time_code {
+        border-color: aquamarine;
+        border-width: 5px;
+        border-style: solid;
+    }
 }
 
 .presentation * {
     max-height: auto;
 	max-width: 100%;
     object-fit: contain;
+   
 }
+

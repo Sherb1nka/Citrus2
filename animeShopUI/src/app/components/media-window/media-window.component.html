@@ -1,11 +1,13 @@
 
 <div class="media-window">
     <div class="media-window-grid_1_1">
-        <ctrs-videoplayer videoFileName="lectionTest.mp4"></ctrs-videoplayer>
+        <ctrs-videoplayer videoFileName="lectionTest.mp4"
+                          [timeCodeToGo]="currentTimeCode"></ctrs-videoplayer>
     </div>
     <div class="media-window-grid_1_2"
          *ngIf="isPresentationAvailable">
-        <ctrs-presentation [presentationSheets]="currentVideoPresentationSheets"></ctrs-presentation>
+        <ctrs-presentation [presentationSheets]="currentVideoPresentationSheets"
+                            (onSlideClick)="handleSlideClick($event)"></ctrs-presentation>
     </div>
     <div class="media-window-grid_1_2"
          *ngIf="!isPresentationAvailable">

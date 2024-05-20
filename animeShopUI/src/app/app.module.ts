@@ -117,6 +117,7 @@ import { environment } from '../environments/environment';
 		FroalaEditorModule.forRoot(),
 		FroalaViewModule.forRoot(),
 		BrowserModule,
+		FormsModule
 	],
 	providers: [
 		{

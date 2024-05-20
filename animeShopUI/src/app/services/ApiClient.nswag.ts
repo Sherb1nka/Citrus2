@@ -326,6 +326,9 @@ export class PresentationSheetModel implements IPresentationSheetModel {
     presentationId?: number;
     imgUrl?: string | undefined;
     htmlText?: string | undefined;
+    timeCodeHours?: number | undefined;
+    timeCodeMinutes?: number | undefined;
+    timeCodeSeconds?: number | undefined;
     presentation?: PresentationModel;
 
     constructor(data?: IPresentationSheetModel) {
@@ -343,6 +346,9 @@ export class PresentationSheetModel implements IPresentationSheetModel {
             this.presentationId = _data["presentationId"];
             this.imgUrl = _data["imgUrl"];
             this.htmlText = _data["htmlText"];
+            this.timeCodeHours = _data["timeCodeHours"];
+            this.timeCodeMinutes = _data["timeCodeMinutes"];
+            this.timeCodeSeconds = _data["timeCodeSeconds"];
             this.presentation = _data["presentation"] ? PresentationModel.fromJS(_data["presentation"]) : <any>undefined;
         }
     }
@@ -360,6 +366,9 @@ export class PresentationSheetModel implements IPresentationSheetModel {
         data["presentationId"] = this.presentationId;
         data["imgUrl"] = this.imgUrl;
         data["htmlText"] = this.htmlText;
+        data["timeCodeHours"] = this.timeCodeHours;
+        data["timeCodeMinutes"] = this.timeCodeMinutes;
+        data["timeCodeSeconds"] = this.timeCodeSeconds;
         data["presentation"] = this.presentation ? this.presentation.toJSON() : <any>undefined;
         return data;
     }
@@ -370,11 +379,15 @@ export interface IPresentationSheetModel {
     presentationId?: number;
     imgUrl?: string | undefined;
     htmlText?: string | undefined;
+    timeCodeHours?: number | undefined;
+    timeCodeMinutes?: number | undefined;
+    timeCodeSeconds?: number | undefined;
     presentation?: PresentationModel;
 }
 
 export class VideoModel implements IVideoModel {
     id?: number;
+    length?: string | undefined;
     presentations?: PresentationModel[] | undefined;
 
     constructor(data?: IVideoModel) {
@@ -389,6 +402,7 @@ export class VideoModel implements IVideoModel {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.length = _data["length"];
             if (Array.isArray(_data["presentations"])) {
                 this.presentations = [] as any;
                 for (let item of _data["presentations"])
@@ -407,6 +421,7 @@ export class VideoModel implements IVideoModel {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["length"] = this.length;
         if (Array.isArray(this.presentations)) {
             data["presentations"] = [];
             for (let item of this.presentations)
@@ -418,6 +433,7 @@ export class VideoModel implements IVideoModel {
 
 export interface IVideoModel {
     id?: number;
+    length?: string | undefined;
     presentations?: PresentationModel[] | undefined;
 }
 

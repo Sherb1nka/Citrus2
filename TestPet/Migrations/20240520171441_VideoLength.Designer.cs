@@ -3,6 +3,7 @@ using System;
 using CitrusWeb.Api.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CitrusWeb.Api.Migrations
 {
     [DbContext(typeof(CitrusUnitOfWork))]
-    partial class CitrusUnitOfWorkModelSnapshot : ModelSnapshot
+    [Migration("20240520171441_VideoLength")]
+    partial class VideoLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

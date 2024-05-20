@@ -1,5 +1,6 @@
 <ul class="presentation_sheetlist">
 	<li *ngFor="let ps of presentationSheets">
 		<img src="{{ps?.imgUrl}}">
+		<span class="time_code">{{ps.timeCodeHours}}:{{ps.timeCodeMinutes}}:{{ps.timeCodeSeconds}}</span>
 	</li>
 </ul>

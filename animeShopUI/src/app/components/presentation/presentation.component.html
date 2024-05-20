@@ -1,3 +1,5 @@
 <div class="presentation" *ngFor="let ps of presentationSheets">
-    <img src="{{ps?.imgUrl}}">
+    <img src="{{ps?.imgUrl}}"
+        (click)="goToTimeCode(ps.timeCodeHours, ps.timeCodeMinutes, ps.timeCodeSeconds)">
+	<span class="time_code">{{ps.timeCodeHours}}:{{ps.timeCodeMinutes}}:{{ps.timeCodeSeconds}}</span>
 </div>

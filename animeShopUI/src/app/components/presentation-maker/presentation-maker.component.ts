@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { PresentationSheetComponent } from "./presentation-sheet/presentation-sheet.component";
 import { PresentationSheetlistComponent } from "./presentation-sheetlist/presentation-sheetlist.component";
-import { PresentationApiClient, PresentationModel, PresentationSheetModel } from '../../services/ApiClient.nswag';
+import { PresentationApiClient, PresentationModel, PresentationSheetModel, VideoApiClient } from '../../services/ApiClient.nswag';
 import { Navigation, Router } from '@angular/router';
 
 @Component({
@@ -11,16 +11,29 @@ import { Navigation, Router } from '@angular/router';
     styleUrl: './presentation-maker.component.scss',
     imports: [PresentationSheetComponent, PresentationSheetlistComponent]
 })
-export class PresentationMakerComponent {
+export class PresentationMakerComponent implements OnInit {
     private _presentation: PresentationModel = new PresentationModel;
     private _imageUrls: string[] = [];
+    private _videoLength: string = "";
 
     constructor(private _presentationApiClient: PresentationApiClient,
+                private _videoApiClient: VideoApiClient,
                 private readonly _router: Router) {
 
         let nav: Navigation = this._router.getCurrentNavigation() as Navigation;
         if (nav.extras && nav.extras.state && nav.extras.state["videoId"]) {
             this.presentation.videoId = nav.extras.state["videoId"] as number;
+        }
+    }
+
+    ngOnInit(): void {
+        if (this.presentation.videoId) {
+            this._videoApiClient.getVideoById(this.presentation.videoId)
+                .toPromise()
+                .then(v => {
+                    this._videoLength = v?.length as string;
+                })
+                .catch(e => console.log(e));
         }
     }
 
@@ -34,6 +47,10 @@ export class PresentationMakerComponent {
 
     get presentationSheetsList(): PresentationSheetModel[] {
         return this.presentation.presentationSheets ?? [];
+    }
+
+    get videoLength(): string {
+        return this._videoLength;
     }
 
     handleSlideSave(presentationSheet: PresentationSheetModel): void

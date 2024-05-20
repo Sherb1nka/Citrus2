@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CitrusWeb.Api.DataAccess.DomainObjects;
 
@@ -14,6 +12,12 @@ public partial class PresentationSheetModel
     public string? ImgUrl { get; set; }
 
     public string? HtmlText { get; set; }
+
+    public int? TimeCodeHours { get; set; }
+
+    public int? TimeCodeMinutes { get; set; }
+
+    public int? TimeCodeSeconds { get; set; }
 
     public virtual PresentationModel? Presentation { get; set; }
 }

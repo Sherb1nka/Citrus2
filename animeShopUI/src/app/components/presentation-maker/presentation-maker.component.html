@@ -5,7 +5,8 @@
     </div>
     
     <div class="presentation-maker-grid1_2">
-        <ctrs-presentation-sheet (onSlideSave)="handleSlideSave($event)">
+        <ctrs-presentation-sheet (onSlideSave)="handleSlideSave($event)"
+                                 [maxLength]="videoLength">
         </ctrs-presentation-sheet>
     </div>
 </div>

@@ -7,6 +7,15 @@
     <button (click)="makeSnapshot()">
         <span>Сохранить слайд</span>
     </button>
+    <input type="number" 
+           placeholder="HH" 
+           [(ngModel)]="hours">:
+    <input type="number" 
+           placeholder="MM" 
+           [(ngModel)]="minutes">:
+    <input type="number"
+           placeholder="SS"
+           [(ngModel)]="seconds">
 </div>
 
 
