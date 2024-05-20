@@ -52,7 +52,7 @@ services:
       context: .
       dockerfile: TestPet/Dockerfile
     ports:
-      - "5001:80"
+      - "5001:8080"
     depends_on:
       - rabbitmq3
 
